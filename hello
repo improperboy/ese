@@ -1,0 +1,277 @@
+
+
+i need you to generate all the git hub main cmds along with thier use
+
+Git & GitHub Main Commands Cheat Sheet
+1. Configure Git
+Set username
+git config --global user.name "Your Name"
+Used to set your Git username.
+
+Set email
+git config --global user.email "you@example.com"
+Used to set your Git email.
+
+Check configuration
+git config --list
+Shows all Git settings.
+
+2. Initialize & Clone Repository
+Initialize a new repository
+git init
+Creates a new local Git repository.
+
+Clone an existing repository
+git clone <repo-url>
+Downloads a GitHub repository to your system.
+
+Example:
+
+git clone https://github.com/user/project.git
+3. Check Repository Status
+Check current status
+git status
+Shows:
+
+modified files
+
+staged files
+
+untracked files
+
+4. Add Files
+Add a single file
+git add filename
+Add all files
+git add .
+Add all tracked modified files
+git add -u
+5. Commit Changes
+Commit staged changes
+git commit -m "message"
+Example:
+
+git commit -m "Added login page"
+Add + commit together
+git commit -am "message"
+Works only for already tracked files.
+
+6. View Commit History
+Show commit history
+git log
+Compact history
+git log --oneline
+Graph view
+git log --oneline --graph --all
+7. Branch Commands
+Create branch
+git branch branch-name
+List branches
+git branch
+Switch branch
+git checkout branch-name
+Create and switch together
+git checkout -b branch-name
+Modern switch command
+git switch branch-name
+Create and switch (modern)
+git switch -c branch-name
+Delete branch
+git branch -d branch-name
+Force delete branch
+git branch -D branch-name
+8. Merge Commands
+Merge branch into current branch
+git merge branch-name
+Used after switching to target branch.
+
+Example:
+
+git checkout main
+git merge feature-login
+9. Remote Repository Commands
+Add remote repository
+git remote add origin <repo-url>
+View remotes
+git remote -v
+Remove remote
+git remote remove origin
+Change remote URL
+git remote set-url origin <new-url>
+10. Push Commands
+First push
+git push -u origin main
+Push changes
+git push
+Push specific branch
+git push origin branch-name
+Force push
+git push --force
+Safer force push
+git push --force-with-lease
+11. Pull & Fetch Commands
+Pull latest changes
+git pull
+Pull specific branch
+git pull origin main
+Fetch changes only
+git fetch
+Fetch all branches
+git fetch --all
+Difference:
+
+pull = fetch + merge
+
+fetch = download only
+
+12. Undo Commands
+Unstage file
+git restore --staged filename
+Discard file changes
+git restore filename
+Reset last commit (keep changes)
+git reset --soft HEAD~1
+Reset last commit (remove changes)
+git reset --hard HEAD~1
+Reset to specific commit
+git reset --hard <commit-id>
+13. Stash Commands
+Save temporary changes
+git stash
+View stashes
+git stash list
+Apply stash
+git stash apply
+Apply and remove stash
+git stash pop
+Delete stash
+git stash drop
+14. Rebase Commands
+Rebase current branch
+git rebase main
+Interactive rebase
+git rebase -i HEAD~3
+Used to:
+
+squash commits
+
+edit commits
+
+clean history
+
+15. Tag Commands
+Create tag
+git tag v1.0
+List tags
+git tag
+Push tag
+git push origin v1.0
+Push all tags
+git push --tags
+16. File Difference Commands
+Show differences
+git diff
+Show staged differences
+git diff --staged
+Compare commits
+git diff commit1 commit2
+17. GitHub Authentication
+Login using GitHub CLI
+gh auth login
+Clone using SSH
+git clone git@github.com:user/repo.git
+Generate SSH key
+ssh-keygen -t ed25519 -C "you@example.com"
+Test SSH connection
+ssh -T git@github.com
+18. GitHub CLI Commands
+Install GitHub CLI
+Linux:
+
+sudo apt install gh
+Create repository
+gh repo create
+Create pull request
+gh pr create
+View pull requests
+gh pr list
+Clone repository
+gh repo clone user/repo
+19. Remove Files from Git
+Remove tracked file
+git rm filename
+Remove cached file only
+git rm --cached filename
+20. Useful Advanced Commands
+Show who changed each line
+git blame filename
+Search commit message
+git log --grep="keyword"
+Clean untracked files
+git clean -f
+Clean directories too
+git clean -fd
+Cherry-pick commit
+git cherry-pick <commit-id>
+21. Common Full Workflow
+New Project
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin <repo-url>
+git push -u origin main
+Daily Workflow
+git pull
+git add .
+git commit -m "Updated feature"
+git push
+Branch Workflow
+git checkout -b feature-auth
+git add .
+git commit -m "Added auth"
+git push origin feature-auth
+22. Most Important Commands for Interviews & Exams
+git init
+git clone
+git status
+git add .
+git commit -m ""
+git push
+git pull
+git branch
+git checkout
+git merge
+git rebase
+git stash
+git log
+git diff
+git reset
+git remote -v
+23. Quick Difference Between Commands
+Command	Purpose
+git fetch	Download changes
+git pull	Download + merge
+git merge	Combine branches
+git rebase	Move commits
+git reset	Undo commits
+git revert	Reverse commit safely
+git stash	Temporary save
+git checkout	Switch branch/file
+git switch	Modern branch switch
+24. Emergency Fix Commands
+Undo last commit safely
+git revert HEAD
+Recover deleted branch
+git reflog
+See all actions history
+git reflog
+25. Helpful Aliases
+Create shortcut aliases
+git config --global alias.s status
+git config --global alias.c commit
+git config --global alias.l "log --oneline --graph"
+Usage:
+
+git s
+git l
+
