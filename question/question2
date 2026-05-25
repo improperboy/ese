@@ -1,0 +1,46 @@
+[Git] Interactive Rebase
+
+You are tasked with restructuring and managing a Git commit history to ensure a clean and meaningful commit log. The goal is to automate the process of squashing redundant commits, updating commit messages, and reverting unnecessary changes using non-interactive rebase and revert operations.
+
+
+Tasks
+
+
+Create a branch:
+
+
+Create and switch to a new branch named cleanup-history from the main branch.
+
+Make three commits:
+
+
+Commit 1: Add the text "Typo fix" to a file named README.md and commit with the message: "Fix typos in README"
+
+Commit 2: Create a file named dependencies.txt with the content "Updated dependencies" and commit with the message: "Update project dependencies"
+
+Commit 3: Add the text "Formatted README" to the existing README.md file and commit with the message: "Improve README formatting"
+
+Squash commits using non-interactive rebase:
+
+
+Squash the first commit (Fix typos in README) and the third commit (Improve README formatting) into a single commit.
+
+
+The updated commit message for the squashed commit should be: "Updated README"
+
+
+Update the combined commit message to: "Updated README"
+
+Revert the second commit:
+
+
+The commit message for the second commit is: "Update project dependencies".
+
+This commit needs to be reverted because the dependency updates were deemed unnecessary.
+
+Verify the updated history:
+
+
+The first and third commits are squashed with the message "Updated README".
+
+The second commit is reverted with an appropriate message: "Revert 'Update project dependencies'"
