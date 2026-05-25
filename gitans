@@ -1,0 +1,22 @@
+git checkout -b cleanup-history
+echo "Typo fix" >> README.md git add README.md git commit 
+-m "Fix typos in README"
+# 3. Commit 2
+echo "Updated dependencies" > dependencies.txt git add 
+dependencies.txt git commit -m "Update project 
+dependencies"
+# 4. Commit 3
+echo "Formatted README" >> README.md git add README.md git 
+commit -m "Improve README formatting"
+# 5. Non-interactive rebase (reorder + squash)
+GIT_SEQUENCE_EDITOR="sed -i 
+'1s/^pick/edit/;3s/^pick/squash/;2s/^pick/pick/'" \ git 
+rebase -i HEAD~3
+# Amend message for squashed commit
+git commit --amend -m "Updated README"
+# Continue rebase
+git rebase --continue || true
+# 6. Revert second commit
+git revert --no-edit HEAD~1
+# 7. Show final history
+git log --oneline
