@@ -1,2 +1,38 @@
 Here is question 1:
 
+[Jenkins] Version Control using Git
+
+Install Jenkins on the Ubuntu machine and configure a pipeline job with the specified functionality. You have access to an Ubuntu terminal and will execute all tasks within the working directory: /home/ubuntu/code.
+
+
+Tasks
+
+
+Jenkins Installation and Setup:
+
+You have been provided with a script file, jenkins_setup.sh, to install and configure Jenkins along with the required plugins. Execute this script to initiate the installation.
+
+After the installation is complete, the Jenkins admin password will be stored in the file jenkins_admin_password within your current working directory (/home/ubuntu/code).
+
+In case you encounter a GPG Key error during installation, refer to the README.md file for troubleshooting steps.
+
+You are provided with pipeline-job.xml file. Complete the given steps in it.
+
+Add a stage called 'Checkout' to fetch the code from the main branch of this Git repository: git_repo
+
+Build the jenkins job and send console output to test1.log.
+
+Testing instructions
+
+
+Redirect the output to a file using the syntax: your_command > test.log to log the console output.
+
+After building the job, wait for 10 seconds before redirecting the output to a file.
+
+On clicking Submit, if the Jenkins installation fails, the first test case will show JenkinsInstallationFailure. Otherwise, it will be skipped, and statuses for test cases used in the actual evaluation will be displayed.
+
+Submission instructions
+
+
+there are also some given files
+
