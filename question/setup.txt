@@ -1,0 +1,51 @@
+#!/bin/bash
+set -e
+
+# 1. Commit 1
+echo "Typo fix" >> README.md
+git add README.md
+git commit -m "Fix typos in README"
+
+# 2. Commit 2
+echo "Updated dependencies" > dependencies.txt
+git add dependencies.txt
+git commit -m "Update project dependencies"
+
+# 3. Commit 3
+echo "Formatted README" >> README.md
+git add README.md
+git commit -m "Improve README formatting"
+
+# 4. Save commit hashes
+COMMIT1=$(git log --oneline | grep "Fix typos in README" | awk '{print $1}')
+COMMIT2=$(git log --oneline | grep "Update project dependencies" | awk '{print $1}')
+BASE=$(git log --oneline | tail -1 | awk '{print $1}')
+
+# 5. Squash commit1 + commit3 into "Updated README"
+git reset --hard $BASE
+git cherry-pick $COMMIT1
+git cherry-pick $(git log --oneline | grep "Improve README formatting" | awk '{print $1}') 2>/dev/null || \
+git cherry-pick $COMMIT1
+git reset --soft HEAD~2
+git commit -m "Updated README"
+
+# 6. Put commit2 back
+git cherry-pick $COMMIT2
+
+# 7. Revert commit2
+DEPS_COMMIT=$(git log --oneline | grep "Update project dependencies" | awk '{print $1}')
+git revert --no-edit $DEPS_COMMIT
+
+# 8. Show final history
+git log --oneline
+
+
+
+
+
+
+
+
+command to run 
+chmod +x script.sh
+./script.sh
