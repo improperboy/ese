@@ -1,0 +1,40 @@
+# 1. Create and switch to branch
+git checkout -b cleanup-history
+
+# 2. Commit 1
+echo "Typo fix" >> README.md
+git add README.md
+git commit -m "Fix typos in README"
+
+# 3. Commit 2
+echo "Updated dependencies" > dependencies.txt
+git add dependencies.txt
+git commit -m "Update project dependencies"
+
+# 4. Commit 3
+echo "Formatted README" >> README.md
+git add README.md
+git commit -m "Improve README formatting"
+
+# 5. Save commit hashes before reset
+COMMIT1=$(git log --oneline | grep "Fix typos in README" | awk '{print $1}')
+COMMIT2=$(git log --oneline | grep "Update project dependencies" | awk '{print $1}')
+COMMIT3=$(git log --oneline | grep "Improve README formatting" | awk '{print $1}')
+BASE=$(git log --oneline | tail -1 | awk '{print $1}')
+
+# 6. Squash commit1 + commit3 into "Updated README"
+git reset --hard $BASE
+git cherry-pick $COMMIT1
+git cherry-pick $COMMIT3
+git reset --soft HEAD~2
+git commit -m "Updated README"
+
+# 7. Put commit2 back
+git cherry-pick $COMMIT2
+
+# 8. Revert commit2
+DEPS_COMMIT=$(git log --oneline | grep "Update project dependencies" | awk '{print $1}')
+git revert --no-edit $DEPS_COMMIT
+
+# 9. Verify
+git log --oneline
