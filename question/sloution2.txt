@@ -1,0 +1,49 @@
+# Setup (skip if repo already exists)
+mkdir -p /home/ubuntu/code && cd /home/ubuntu/code
+git init
+git config user.email "user@example.com"
+git config user.name "User"
+
+# Create main branch with initial commit
+git checkout -b main
+echo "Initial file" > initial.txt
+git add .
+git commit -m "Initial commit"
+
+# Task 1: Create and switch to cleanup-history branch
+git checkout -b cleanup-history
+
+# Task 2: Three commits
+echo "Typo fix" >> README.md
+git add README.md
+git commit -m "Fix typos in README"
+
+echo "Updated dependencies" > dependencies.txt
+git add dependencies.txt
+git commit -m "Update project dependencies"
+
+echo "Formatted README" >> README.md
+git add README.md
+git commit -m "Improve README formatting"
+
+# Task 3: Squash commit1 + commit3 into "Updated README"
+COMMIT1=$(git log --oneline | grep "Fix typos in README" | awk '{print $1}')
+COMMIT2=$(git log --oneline | grep "Update project dependencies" | awk '{print $1}')
+COMMIT3=$(git log --oneline | grep "Improve README formatting" | awk '{print $1}')
+BASE=$(git log --oneline | tail -1 | awk '{print $1}')
+
+git reset --hard $BASE
+git cherry-pick $COMMIT1
+git cherry-pick $COMMIT3
+git reset --soft HEAD~2
+git commit -m "Updated README"
+
+# Put commit2 back
+git cherry-pick $COMMIT2
+
+# Task 4: Revert commit2
+DEPS_COMMIT=$(git log --oneline | grep "Update project dependencies" | awk '{print $1}')
+git revert --no-edit $DEPS_COMMIT
+
+# Verify final history
+git log --oneline
